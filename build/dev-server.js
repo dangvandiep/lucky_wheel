@@ -6,22 +6,22 @@ if (!process.env.NODE_ENV) {
   process.env.NODE_ENV = JSON.parse(config.dev.env.NODE_ENV)
 }
 
-const opn = require('opn')
-const path = require('path')
-const express = require('express')
-const webpack = require('webpack')
+const opn             = require('opn')
+const path            = require('path')
+const express         = require('express')
+const webpack         = require('webpack')
 const proxyMiddleware = require('http-proxy-middleware')
-const webpackConfig = require('./webpack.dev.conf')
+const webpackConfig   = require('./webpack.dev.conf')
 
 // default port where dev server listens for incoming traffic
-const port = process.env.PORT || config.dev.port
+const port            = process.env.PORT || config.dev.port
 // automatically open browser, if not set will be false
 const autoOpenBrowser = !!config.dev.autoOpenBrowser
 // Define HTTP proxies to your custom API backend
 // https://github.com/chimurai/http-proxy-middleware
 const proxyTable = config.dev.proxyTable
 
-const app = express()
+const app      = express()
 const compiler = webpack(webpackConfig)
 
 const devMiddleware = require('webpack-dev-middleware')(compiler, {
@@ -66,17 +66,15 @@ app.use(devMiddleware)
 const staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsSubDirectory)
 app.use(staticPath, express.static('./static'))
 
-const uri = 'http://localhost:' + port
-
-var _resolve
-var _reject
-var readyPromise = new Promise((resolve, reject) => {
+let _resolve
+let _reject
+let readyPromise = new Promise((resolve, reject) => {
   _resolve = resolve
-  _reject = reject
+  _reject  = reject
 })
 
-var server
-var portfinder = require('portfinder')
+let server
+let portfinder      = require('portfinder')
 portfinder.basePort = port
 
 console.log('> Starting dev server...')
@@ -86,7 +84,7 @@ devMiddleware.waitUntilValid(() => {
       _reject(err)
     }
     process.env.PORT = port
-    var uri = 'http://localhost:' + port
+    let uri          = 'http://localhost:' + port
     console.log('> Listening at ' + uri + '\n')
     // when env is testing, don't need open it
     if (autoOpenBrowser && process.env.NODE_ENV !== 'testing') {

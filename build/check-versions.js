@@ -1,9 +1,10 @@
 'use strict'
-const chalk = require('chalk')
-const semver = require('semver')
+const chalk         = require('chalk')
+const semver        = require('semver')
 const packageConfig = require('../package.json')
-const shell = require('shelljs')
-function exec (cmd) {
+const shell         = require('shelljs')
+
+function exec(cmd) {
   return require('child_process').execSync(cmd).toString().trim()
 }
 

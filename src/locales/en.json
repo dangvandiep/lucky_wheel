@@ -1,0 +1,9 @@
+{
+  "message": {
+    "lottery_ticket": "Remaining coins: {count}",
+    "guild": "Guild",
+    "close": "Close",
+    "win": "You got: {prize}",
+    "lost": "Wish you luck next time."
+  }
+}

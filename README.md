@@ -1,40 +1,33 @@
-# lucky_wheel
+# VueJS Lucky Wheel
 
->  a vue.js lucky_wheel support pc and mobile
-
-
-在线观看地址
-
-如果导入到项目中发现样式混乱，则需要自己调整样式
+>  A vue.js lucky wheel support pc and mobile
 
 
-https://landluck.github.io/
+Demo: https://landluck.github.io/
 
-
-> v1.1.0 基于之前 v 1.0.0 的版本做了一些优化,更简单易懂
 
 ## Build Setup
 
 ``` bash
 
 
-# 克隆到本地
+# Clone to local
 git clone https://github.com/landluck/lucky_wheel.git
 
-# 进入文件夹
+# Into the folder
 cd lucky_wheel
 
-# 安装依赖
+# Installation depends
 npm install
 
-# 开启本地服务器localhost:8088
+# Turn on the local server localhost:8088
 npm run dev
 
-# 发布环境
+# Publishing environment
 npm run build
 
 
-#然后静待你的浏览器打开一个网页，按F12 进入手机模拟器，查看效果最佳(推荐chrome浏览器，前端开发者的必备)
+# Then wait for your browser to open a web page, press F12 to enter the mobile phone simulator, and see the best results (recommended chrome browser, necessary for front-end developers)
 
 #对你有帮助的话，请 star 一下
 ```

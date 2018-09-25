@@ -1,0 +1,9 @@
+{
+  "message": {
+    "lottery_ticket": "Số xu còn lại: {count}",
+    "guild": "Hướng dẫn",
+    "close": "Đóng",
+    "win": "Bạn nhận được: {prize}",
+    "lost": "Chúc bạn may mắn lần sau."
+  }
+}

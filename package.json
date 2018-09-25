@@ -5,12 +5,14 @@
   "author": "liuhaihong <liuhaihong@eastcom.com>",
   "private": true,
   "scripts": {
-    "dev": "node build/dev-server.js",
+    "dev": "node %NODE_DEBUG_OPTION% build/dev-server.js",
     "start": "npm run dev",
     "build": "node build/build.js"
   },
   "dependencies": {
-    "vue": "^2.5.2"
+    "axios": "^0.18.0",
+    "vue": "^2.5.2",
+    "vue-i18n": "^8.1.0"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
