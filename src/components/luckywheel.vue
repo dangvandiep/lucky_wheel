@@ -12,8 +12,8 @@
               <div class="prize-pic">
                 <img :src="item.icon">
               </div>
-              <div class="prize-count" v-if="item.count">
-                {{item.count}}
+              <div class="prize-count" v-if="item.quantily">
+                {{item.quantily}}
               </div>
               <!--<div class="prize-type">
                 {{item.name}}
@@ -87,7 +87,7 @@
         }
 
         return this.hasPrize
-          ? this.$t('message.win', { prize: this.prize_list[this.index].count + ' ' + this.prize_list[this.index].name })
+          ? this.$t('message.win', { prize: this.prize_list[this.index].quantily + ' ' + this.prize_list[this.index].name })
           : this.$t('message.lost')
       },
       toast_pictrue() {
@@ -102,8 +102,8 @@
         this.update_tickets()
 
         axios.get(CONFIG.prize_list).then(function (response) {
-          vue.description = response.data.description
-          vue.prize_list  = response.data.prize_list
+          vue.description = response.data.data.description
+          vue.prize_list  = response.data.data.prize_list
         })
       },
       update_tickets() {
@@ -118,6 +118,8 @@
       rotate_handle() {
         const vue = this
 
+        vue.rotating(10)
+
         axios.get(CONFIG.rotate).then(function (response) {
           if (response.data.error !== 0) {
             vue.hasPrize      = false
@@ -129,40 +131,31 @@
           vue.prize_list.forEach(function (value, key) {
             if (value.id === response.data.data.id) {
               vue.update_tickets()
+
+              // Rotating
               vue.message = ''
               vue.index   = key
-              vue.rotating()
+              vue.rotating(1)
+
+              // End draw
+              setTimeout(function () {
+                vue.click_flag = true
+                vue.game_over()
+              }, 5 * 1000 + 1500)
             }
           })
         })
       },
-      rotating() {
+      rotating(rand_circle) {
+        console.log('rotating...')
         if (!this.click_flag) return
-        let type         = 0
-        let during_time  = 5
-        //let random       = Math.floor(Math.random() * 7)
+
         let result_index = this.index
         let result_angle = [337.5, 292.5, 247.5, 202.5, 157.5, 112.5, 67.5, 22.5]
-        let rand_circle  = 6
-        this.click_flag  = false
-        if (type === 0) {
-          let rotate_angle           =
-                this.start_rotating_degree +
-                rand_circle * 360 +
-                result_angle[result_index] -
-                this.start_rotating_degree % 360
-          this.start_rotating_degree = rotate_angle
-          this.rotate_angle          = "rotate(" + rotate_angle + "deg)"
-          // this.rotate_angle_pointer = "rotate("+this.start_rotating_degree_pointer + 360*rand_circle+"deg)";
-          // this.start_rotating_degree_pointer =360*rand_circle;
-          let that = this
-          setTimeout(function () {
-            that.click_flag = true
-            that.game_over()
-          }, during_time * 1000 + 1500)
-        } else {
-          //
-        }
+
+        let rotate_angle           = this.start_rotating_degree + rand_circle * 360 + result_angle[result_index] - this.start_rotating_degree % 360
+        this.start_rotating_degree = rotate_angle
+        this.rotate_angle          = "rotate(" + rotate_angle + "deg)"
       },
       game_over() {
         this.toast_control = true

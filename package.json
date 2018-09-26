@@ -5,7 +5,7 @@
   "author": "liuhaihong <liuhaihong@eastcom.com>",
   "private": true,
   "scripts": {
-    "dev": "node %NODE_DEBUG_OPTION% build/dev-server.js",
+    "dev": "node build/dev-server.js",
     "start": "npm run dev",
     "build": "node build/build.js"
   },
