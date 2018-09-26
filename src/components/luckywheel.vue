@@ -69,7 +69,7 @@
         rotate_angle: 0,
         start_rotating_degree_pointer: 0,
         rotate_angle_pointer: 0,
-        rotate_transition: "transform 6s ease-in-out",
+        rotate_transition: "transform 10s ease-in-out",
         rotate_transition_pointer: "transform 12s ease-in-out",
         click_flag: true,
         index: 0,
@@ -116,15 +116,20 @@
         })
       },
       rotate_handle() {
-        const vue = this
+        if (!this.click_flag) return
 
+        const vue = this
         vue.rotating(10)
+        vue.click_flag = false
 
         axios.get(CONFIG.rotate).then(function (response) {
           if (response.data.error !== 0) {
-            vue.hasPrize      = false
-            vue.message       = response.data.message
-            vue.toast_control = true
+            vue.hasPrize          = false
+            vue.message           = response.data.message
+            vue.rotate_transition = "transform 1s ease-in-out"
+            vue.rotate_angle      = "rotate(0deg)"
+            vue.toast_control     = true
+            vue.click_flag        = true
             return false
           }
 
@@ -137,18 +142,18 @@
               vue.index   = key
               vue.rotating(1)
 
-              // End draw
+              // End game
+              vue.rotate_transition = "transform 2s ease-in-out"
               setTimeout(function () {
                 vue.click_flag = true
                 vue.game_over()
-              }, 5 * 1000 + 1500)
+              }, 2 * 1000)
             }
           })
         })
       },
       rotating(rand_circle) {
         console.log('rotating...')
-        if (!this.click_flag) return
 
         let result_index = this.index
         let result_angle = [337.5, 292.5, 247.5, 202.5, 157.5, 112.5, 67.5, 22.5]
