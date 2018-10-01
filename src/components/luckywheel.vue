@@ -69,8 +69,8 @@
         rotate_angle: 0,
         start_rotating_degree_pointer: 0,
         rotate_angle_pointer: 0,
-        rotate_transition: "transform 10s ease-in-out",
-        rotate_transition_pointer: "transform 12s ease-in-out",
+        rotate_transition: "transform 15s ease-in-out",
+        rotate_transition_pointer: "transform 20s ease-in-out",
         click_flag: true,
         index: 0,
         message: '',
@@ -119,6 +119,8 @@
         if (!this.click_flag) return
 
         const vue = this
+
+        vue.rotate_transition = "transform 15s ease-in-out"
         vue.rotating(10)
         vue.click_flag = false
 
